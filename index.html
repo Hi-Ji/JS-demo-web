@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="./index.css">
+  <title>web</title>
+</head>
+
+<!--------------------------------------------------------------------------->
+<body>
+  <div class="totol">
+      <p class="title">List of Rental Products</p>
+  
+    
+      <div class="row nav1">
+        <div class="col-12 col-xxl-3 category">
+          <p style="display: inline-block; font-size: 15px; margin-right: 20px;">Category: </p>
+          <select name="Category" id="category" style="display: inline-block; font-size: 15px;background-color:gainsboro; border-radius: 10px; width: 200px;" >
+            <option value="0" class="option">All Hires</option>
+            <option value="1" class="option">Arches & Balloon/Flower Stands</option>
+            <option value="2" class="option">Carts</option>
+            <option value="3" class="option">Party Hire</option>
+            <option value="5" class="option">Tableware</option>
+            <option value="25" class="option">LED Letter & Number Lights</option>
+            <option value="11" class="option">Centrepiece Hire - Candles & Vases</option>
+            <option value="15" class="option">Backdrops & Flower Walls</option>
+            <option value="21" class="option">Cake & Dessert Stands</option>
+            <option value="18" class="option">Table & Consoles</option>
+            <option value="12" class="option">Plinths</option>
+            <option value="27" class="option">Tablecloths</option>
+            <option value="16" class="option">Chairs</option>
+            <option value="20" class="option">Wooden Crates</option>
+            <option value="51" class="option">Mirrors</option>
+            <option value="14" class="option">Wedding Crates</option>
+            <option value="10" class="option">Baby Shower</option>
+            <option value="47" class="option">Luxe Dream Wedding Flowers</option>
+            <option value="49" class="option">Luxe Dream Floral Studio</option>
+          </select>
+          
+          <button type="button" class="btn btn-outline-secondary" onclick="category()" style="font-size: 10px; margin-left: 20px; background-color: gainsboro;">Show</button>
+        </div>
+        
+        <div class="col-12 col-xxl-3 price">
+          
+            <p style="display: inline-block; font-size: 15px; margin-right: 20px;">Price:</p>
+            <select name="Price" id="price" style="display: inline-block; font-size: 5px;background-color:gainsboro; border-radius: 10px;">
+              <option value="0" class="option">All</option>
+              <option value="100" class="option">0 - 100</option>
+              <option value="200" class="option">101 - 200</option>
+              <option value="500" class="option">201 - 500</option>
+              <option value="501" class="option">> 500</option>
+            </select>
+            <button type="button" class="btn btn-outline-secondary" onclick="price()" style="font-size: 10px; margin-left: 20px;background-color: gainsboro;">Show</button>
+          
+        </div>
+
+        <div class="col-12 col-xxl-3 sort">
+          <p style="display: inline-block; font-size: 15px; margin-right: 0px; ">Alpha Sort:</p>
+          <div class="ascending" style="display: inline-block;">
+            <button type="button" class="btn btn-outline-secondary" onclick="Alph_ascending()" style="font-size: 5px; margin-left: 20px;background-color: gainsboro;">Ascending</button>
+          </div>
+          <div class="decending" style="display: inline-block;">
+            <button type="button" class="btn btn-outline-secondary" onclick="Alph_decending()" style="font-size: 1px; margin-left: 20px;background-color: gainsboro;">Decending</button>
+          </div>
+        </div>
+
+        <div class="col-12 col-xxl-3 sort1">
+          <p style="display: inline-block; font-size: 15px; margin-right: 0px; ">Price Sort:</p>
+          <div class="ascending" style="display: inline-block;">
+            <button type="button" class="btn btn-outline-secondary" onclick="Price_ascending()" style="font-size: 5px; margin-left: 20px;background-color: gainsboro;">Ascending</button>
+          </div>
+          <div class="decending" style="display: inline-block;">
+            <button type="button" class="btn btn-outline-secondary" onclick="Price_decending()" style="font-size: 1px; margin-left: 20px;background-color: gainsboro;">Decending</button>
+          </div>
+        </div>
+        
+      </div>
+   
+      
+
+    <div class=" infor">
+      <div class="row" id="item" style="margin: 10px 0;"></div>
+      <hr>
+      <hr>
+    </div>
+  </div>
+  <div class="bottom"> 
+    <div class="bottom1">Thank you for visiting our product!</div>
+  </div>
+
+  <!--------------------------------------------------------------------------->
+  <script src="./data.js"></script>
+  <script src="./index.js"></script>
+
+
+ 
+  
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+</html>

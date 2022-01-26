@@ -1,0 +1,97 @@
+#main1 {
+  margin: 0 auto;
+}
+
+.title {
+  font-size: 30px;
+  text-align: center;
+  color: cornflowerblue;
+  border-bottom: 5px solid cornflowerblue;
+  max-width: 300px;
+}
+
+.title1 {
+  font-size: 30px;
+  text-align: center;
+  color: cornflowerblue;
+  border-bottom: 5px solid cornflowerblue;
+  margin-top: 50px;
+}
+
+.description1{
+  font-size: 18px;
+  margin-top: 30px;
+}
+
+.description2{
+  font-size: 15px;
+}
+
+.price_discount {
+  font-size: 23px;
+  font-weight: bolder;
+  
+}
+
+.a{
+  flex: 1;
+}
+
+
+
+.stock {
+  font-size: 18px;
+  color: red;
+
+  font-weight: bolder;
+  margin: 0 auto;
+}
+
+.create_time {
+  color: gray;
+  margin-top: 30px;
+}
+
+.num {
+  font-size: 25px;
+  margin-top: 20px;
+} 
+
+.nav {
+  background-color: gray;
+}
+
+.nav1 {
+  width: fit-content;
+  text-align: center;
+  margin: 0 auto;
+  font-style: oblique;
+  font-size: 50px;
+  color: seashell;
+}
+
+body {
+  min-width: 360px;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+.bottom {
+  background-color: gray;
+  width: auto;
+}
+
+.bottom1 {
+  width: fit-content;
+  height: fit-content;
+  margin:0 auto;
+  text-align: center;
+
+  font-size: 30px;
+  color: honeydew;
+}
+
+.total_stock {
+  text-align: center;
+}
