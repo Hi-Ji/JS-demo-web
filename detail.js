@@ -1,6 +1,7 @@
 function Details () {
      var url = location.search;
-     var id_num = url.substring(1); 
+     var id_num1 = url.substring(1).indexOf("="); 
+     var id_num = url.substring(1).substring(id_num1+1);
 
      let detail_infor = '';
      for (let i of rawdata) {
@@ -8,7 +9,7 @@ function Details () {
         let imgaddre = "https://storage.googleapis.com/luxe_media/wwwroot/" + i.productMedia[0].url;
         detail_infor += `
         <div class="row" style="margin:0">
-          <div class="col-12 col-xl-6 img" style="width:360px; margin: 0 auto;">
+          <div class="col-12 col-xl-6 img" style="width:360px; margin: 20px auto 0 auto;">
             <img src="${imgaddre}" style="width: 100%;  height: 350px;">
           </div>
           <div class="col-12 col-xl-6 total_infor" style="text-align: center;margin: 0 auto;">

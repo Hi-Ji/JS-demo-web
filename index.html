@@ -18,7 +18,7 @@
       <div class="row nav1">
         <div class="col-12 col-xxl-3 category">
           <p style="display: inline-block; font-size: 15px; margin-right: 20px;">Category: </p>
-          <select name="Category" id="category" style="display: inline-block; font-size: 15px;background-color:gainsboro; border-radius: 10px; width: 200px;" >
+          <select name="Category" id="category" style="display: inline-block; font-size: 15px;background-color:gainsboro; border-radius: 10px; width: 200px;" onchange="category()" >
             <option value="0" class="option">All Hires</option>
             <option value="1" class="option">Arches & Balloon/Flower Stands</option>
             <option value="2" class="option">Carts</option>
@@ -39,22 +39,18 @@
             <option value="47" class="option">Luxe Dream Wedding Flowers</option>
             <option value="49" class="option">Luxe Dream Floral Studio</option>
           </select>
-          
-          <button type="button" class="btn btn-outline-secondary" onclick="category()" style="font-size: 10px;margin-left: 20px; background-color: gainsboro;">Show</button>
         </div>
         
         <div class="col-12 col-xxl-3 price">
           
             <p style="display: inline-block; font-size: 15px; margin-right: 20px;">Price:</p>
-            <select name="Price" id="price" style="display: inline-block; font-size: 15px;background-color:gainsboro; border-radius: 10px;">
+            <select name="Price" id="price" style="display: inline-block; font-size: 15px;background-color:gainsboro; border-radius: 10px;" onchange="price()">
               <option value="0" class="option">All</option>
               <option value="100" class="option">0 - 100</option>
               <option value="200" class="option">101 - 200</option>
               <option value="500" class="option">201 - 500</option>
               <option value="501" class="option">> 500</option>
             </select>
-            <button type="button" class="btn btn-outline-secondary" onclick="price()" style="font-size: 10px;margin-left: 20px;background-color: gainsboro;">Show</button>
-          
         </div>
 
         <div class="col-12 col-xxl-3 sort">
@@ -88,7 +84,7 @@
     </div>
   </div>
   <div class="bottom"> 
-    <div class="bottom1">Thank you for visiting our product!</div>
+    <button type="button" class="btn" onclick="reset()" style="color: aliceblue;">Thank you for visiting our product, <a style="color: red;">click reset</a>!</button>
   </div>
 
   <!--------------------------------------------------------------------------->

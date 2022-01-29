@@ -57,6 +57,10 @@
   background-color: gray;
 }
 
+.btn:hover {
+  background-color: black;
+}
+
 
 .test {
   margin-left: 50px;

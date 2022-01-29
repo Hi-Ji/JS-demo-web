@@ -1,6 +1,9 @@
 let data_list = [];
 let price_list = [];
 category ();
+price ();
+Render(rawdata);
+var count_url = 0;
 
 
 function category () {
@@ -17,8 +20,9 @@ function category () {
     }
   }
   Render(data_list);
-  price ();
+  url_check('category',category_value);
 }
+
 
 function price () {
   price_list = [];
@@ -40,6 +44,7 @@ function price () {
   }else {
     Render(data_list);
   }
+  url_check("price",price_value);
 }
 
 function Alph_ascending() {
@@ -74,6 +79,7 @@ function Alph_ascending() {
     }
   }
   Render(ascending_list);
+  url_check("sort","alph_ascending");
 }
 
 
@@ -110,6 +116,7 @@ function Alph_decending() {
     }
     Render(ascending_list);
   }
+  url_check("sort","alph_decending");
 }
 
 function Price_ascending() {
@@ -143,6 +150,7 @@ function Price_ascending() {
     }
   }
   Render(ascending_list);
+  url_check("sort","pric_ascending");
 }
 
 
@@ -176,29 +184,51 @@ function Price_decending() {
       }
     }
   }
+  url_check("sort","pric_decending");
   Render(ascending_list);
 }
 
+function url_check(url_name,url_num){
+  var url_search = window.location.search;
 
+  if (url_search.indexOf('?')==-1){
+    url_add('?',url_name,url_num);
 
+  }else{
+    if (url_search.indexOf(url_name)==-1) {
 
-
-
-
-
-
-
-
-
-
-
-
-
-function word(string){
-  var r = /[a-zA-Z+]/g;
-  var s = string.match(r).join("");
-  return s;
+      url_add('&',url_name,url_num);
+    }else{
+      replace_url(url_name,url_num);
+      console.log(url_name)
+    }
+  }
 }
+
+
+function url_add(sign,name,num){
+  var url = location.href + sign + name +'='+ num;
+  history.pushState({},"",url);
+}
+
+
+function replace_url(url_name,url_num){
+  var oUrl = this.location.href.toString();
+  var re = eval('/('+url_name+'=)([^&]*)/gi');
+  var nUrl = oUrl.replace(re,url_name+'='+url_num);
+  console.log(nUrl);
+  history.replaceState(0,0,nUrl);
+  
+}
+
+function reset(){
+  var url = window.location.href;
+  var new_url1 = url.indexOf("?");
+  var new_url = url.substring(0, new_url1);
+  window.location.replace(new_url);
+}
+
+
 
 
 function Render(data_list){
@@ -208,7 +238,7 @@ function Render(data_list){
   for (let i of data_list) {
     if (i.productMedia[0] && i.productMedia[0].url) {
       let imgAddre = "https://storage.googleapis.com/luxe_media/wwwroot/" + i.productMedia[0].url;
-      let detailaddress = "./detail.html?" + i.prodId;
+      let detailaddress = "./detail.html?prodId=" + i.prodId;
       count += 1;
 
       infor += `
