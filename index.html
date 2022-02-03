@@ -17,8 +17,8 @@
     
       <div class="row nav1">
         <div class="col-12 col-xxl-3 category">
-          <p style="display: inline-block; font-size: 15px; margin-right: 20px;">Category: </p>
-          <select name="Category" id="category" style="display: inline-block; font-size: 15px;background-color:gainsboro; border-radius: 10px; width: 200px;" onchange="category()" >
+          <p class="nav_Cate">Category: </p>
+          <select name="Category" id="category" onchange="url_check(id,value);distribution()" >
             <option value="0" class="option">All Hires</option>
             <option value="1" class="option">Arches & Balloon/Flower Stands</option>
             <option value="2" class="option">Carts</option>
@@ -43,8 +43,8 @@
         
         <div class="col-12 col-xxl-3 price">
           
-            <p style="display: inline-block; font-size: 15px; margin-right: 20px;">Price:</p>
-            <select name="Price" id="price" style="display: inline-block; font-size: 15px;background-color:gainsboro; border-radius: 10px;" onchange="price()">
+            <p class="nav_Price">Price:</p>
+            <select name="Price" id="price" onchange="url_check(id,value);distribution()">
               <option value="0" class="option">All</option>
               <option value="100" class="option">0 - 100</option>
               <option value="200" class="option">101 - 200</option>
@@ -54,37 +54,39 @@
         </div>
 
         <div class="col-12 col-xxl-3 sort">
-          <p style="display: inline-block; font-size: 15px; margin-right: 0px; ">Alph Sort:</p>
-          <div class="ascending" style="display: inline-block;">
-            <button type="button" class="btn btn-outline-secondary" onclick="Alph_ascending()" style="font-size: 10px;margin-left: 20px;background-color: gainsboro;">Ascending</button>
+          <p class="nav_Alph_Sort">Alph Sort:</p>
+          <div class="ascending">
+            <button type="button" class="btn btn-outline-secondary nav_Sort_button" onclick="Alph_ascending()" >Ascending</button>
           </div>
-          <div class="decending" style="display: inline-block;">
-            <button type="button" class="btn btn-outline-secondary" onclick="Alph_decending()" style="font-size: 10px;margin-left: 20px;background-color: gainsboro;">Decending</button>
+          <div class="decending">
+            <button type="button" class="btn btn-outline-secondary nav_Sort_button" onclick="Alph_decending()" >Decending</button>
           </div>
         </div>
 
         <div class="col-12 col-xxl-3 sort1">
-          <p style="display: inline-block; font-size: 15px; margin-right: 0px; ">Price Sort:</p>
-          <div class="ascending" style="display: inline-block;">
-            <button type="button" class="btn btn-outline-secondary" onclick="Price_ascending()" style="font-size: 10px;margin-left: 20px;background-color: gainsboro;">Ascending</button>
+          <p class="nav_Price_Sort">Price Sort:</p>
+          <div class="ascending">
+            <button type="button" class="btn btn-outline-secondary nav_Sort_button" onclick="Price_ascending()" >Ascending</button>
           </div>
-          <div class="decending" style="display: inline-block;">
-            <button type="button" class="btn btn-outline-secondary" onclick="Price_decending()" style="font-size: 10px;margin-left: 20px;background-color: gainsboro;">Decending</button>
+          <div class="decending">
+            <button type="button" class="btn btn-outline-secondary nav_Sort_button" onclick="Price_decending()" >Decending</button>
           </div>
         </div>
-        
       </div>
-   
+
+      <div class="nav_reset">
+        <button type="button" class="btn btn-outline-secondary nav_reset_buttom" onclick="reset()">Reset</button>
+      </div>
       
 
     <div class=" infor">
-      <div class="row" id="item" style="margin: 10px 0;"></div>
+      <div class="row" id="item"></div>
       <hr>
       <hr>
     </div>
   </div>
-  <div class="bottom"> 
-    <button type="button" class="btn" onclick="reset()" style="color: aliceblue;">Thank you for visiting our product, <a style="color: red;">click reset</a>!</button>
+  <div> 
+    <p class="bottom">Thank you for visiting our product</p>
   </div>
 
   <!--------------------------------------------------------------------------->

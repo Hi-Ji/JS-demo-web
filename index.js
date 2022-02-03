@@ -1,57 +1,93 @@
 let data_list = [];
-let price_list = [];
-category ();
-price ();
-Render(rawdata);
-var count_url = 0;
+for (let i of rawdata) {
+  data_list.push(i);
+}
+Render(data_list);
+distribution();
 
-
-function category () {
+function distribution() {
   data_list = [];
-  price_list = [];
-  var category_value = document.getElementById("category").value;
+  let category_list = [];
+  let price_list = [];
+  const params = new URLSearchParams(window.location.search);
+
   for (let i of rawdata) {
-    if (category_value == 0) {
-      data_list.push(i);
-    }else {
-      if (i.categoryId == category_value) {
-        data_list.push(i);
+    category_list.push(i);
+    price_list.push(i);
+  }
+
+  for (const param of params){
+    if (param[0] == 'category'){
+      if (param[1] != 0){
+        category_list = category(param[1]);
+      }
+    }else if (param[0] == 'price'){
+      if (param[1] != 0){
+        price_list = price(param[1]);
+      }
+    }
+  }
+  
+  for (let i of category_list){
+    for (let l of price_list){
+      if (i == l) {
+        data_list.push(l);
+        break;
       }
     }
   }
   Render(data_list);
-  url_check('category',category_value);
+
+  for (const param of params){
+    if (param[0] == 'sort'){
+      if (param[1] == 'Alph_ascending'){
+        Alph_ascending();
+      }else if (param[1] == 'Alph_decending'){
+        Alph_decending();
+      }else if (param[1] == 'Price_ascending'){
+        Price_ascending();
+      }else if (param[1] == 'Price_decending'){
+        Price_decending();
+      }
+    }
+  }
 }
 
 
-function price () {
-  price_list = [];
-  var price_value = document.getElementById("price").value;
-  for (let i of data_list) {
-    if (price_value == 100 && i.price <= 100){
-      price_list.push(i);
-    }else if (price_value == 200 && 101 <= i.price && i.price <= 200) {
-      price_list.push(i);
-    }else if (price_value == 500 && 201 <= i.price && i.price <= 500) {
-      price_list.push(i);
-    }else if (price_value == 501 && i.price >= 501) {
-      price_list.push(i);
+
+
+
+function category (value) {
+  let a_list = [];
+  for (let i of rawdata) {
+      if (i.categoryId == value) {
+        a_list.push(i);
+      }
+  }
+  return a_list;
+}
+
+
+function price (value) {
+  let a_price_list = [];
+  for (let i of rawdata) {
+    if (value == 100 && i.price <= 100){
+      a_price_list.push(i);
+    }else if (value == 200 && 101 <= i.price && i.price <= 200) {
+      a_price_list.push(i);
+    }else if (value == 500 && 201 <= i.price && i.price <= 500) {
+      a_price_list.push(i);
+    }else if (value == 501 && i.price >= 501) {
+      a_price_list.push(i);
     }
   }
-  
-  if (price_value != 0) {
-    Render(price_list);
-  }else {
-    Render(data_list);
-  }
-  url_check("price",price_value);
+  return a_price_list;
 }
+
 
 function Alph_ascending() {
   let ascending_list = [];
   let name_list = [];
-  let price_list_length = price_list.length;
-  if (price_list_length == 0) {
     for (let i of data_list) {
       name_list.push(i.title);
     }
@@ -64,30 +100,14 @@ function Alph_ascending() {
         }
       }
     }
-  }else {
-    for (let i of price_list) {
-      name_list.push(i.title);
-    }
-    name_list.sort();
-    for (let i of name_list) {
-      for (let l of price_list) {
-        if (i == l.title) {
-          ascending_list.push(l);
-          break;
-        }
-      }
-    }
-  }
   Render(ascending_list);
-  url_check("sort","alph_ascending");
+  url_check("sort","Alph_ascending");
 }
 
 
 function Alph_decending() {
-  let ascending_list = [];
+  let decending_list = [];
   let name_list = [];
-  let price_list_length = price_list.length;
-  if (price_list_length == 0) {
     for (let i of data_list) {
       name_list.push(i.title);
     }
@@ -95,34 +115,17 @@ function Alph_decending() {
     for (let i of name_list) {
       for (let l of data_list) {
         if (i == l.title) {
-          ascending_list.push(l);
+          decending_list.push(l);
           break;
         }
       }
     }
-    Render(ascending_list);
-  }else {
-    for (let i of price_list) {
-      name_list.push(i.title);
-    }
-    name_list.sort().reverse();
-    for (let i of name_list) {
-      for (let l of price_list) {
-        if (i == l.title) {
-          ascending_list.push(l);
-          break;
-        }
-      }
-    }
-    Render(ascending_list);
-  }
-  url_check("sort","alph_decending");
+    Render(decending_list);
+    url_check("sort","Alph_decending");
 }
 
 function Price_ascending() {
   let ascending_list = [];
-  let price_list_length = price_list.length;
-  if (price_list_length == 0) {
     for (let i of data_list) {
       ascending_list.push(i);
     }
@@ -135,29 +138,14 @@ function Price_ascending() {
         }
       }
     }
-  }else{
-    for (let i of price_list) {
-      ascending_list.push(i);
-    }
-    for (var n=0; n < ascending_list.length;n++){
-      for (var m=0; m < ascending_list.length;m++){
-        if (ascending_list[n].price < ascending_list[m].price){
-          let temp = ascending_list[n];
-          ascending_list[n] =ascending_list[m];
-          ascending_list[m] = temp;
-        }
-      }
-    }
-  }
   Render(ascending_list);
-  url_check("sort","pric_ascending");
+  url_check("sort","Price_ascending");
 }
 
 
 function Price_decending() {
   let ascending_list = [];
-  let price_list_length = price_list.length;
-  if (price_list_length == 0) {
+
     for (let i of data_list) {
       ascending_list.push(i);
     }
@@ -170,22 +158,8 @@ function Price_decending() {
         }
       }
     }
-  }else{
-    for (let i of price_list) {
-      ascending_list.push(i);
-    }
-    for (var n=0; n < ascending_list.length;n++){
-      for (var m=0; m < ascending_list.length;m++){
-        if (ascending_list[n].price > ascending_list[m].price){
-          let temp = ascending_list[n];
-          ascending_list[n] =ascending_list[m];
-          ascending_list[m] = temp;
-        }
-      }
-    }
-  }
-  url_check("sort","pric_decending");
   Render(ascending_list);
+  url_check("sort","Price_decending");
 }
 
 function url_check(url_name,url_num){
@@ -200,7 +174,6 @@ function url_check(url_name,url_num){
       url_add('&',url_name,url_num);
     }else{
       replace_url(url_name,url_num);
-      console.log(url_name)
     }
   }
 }
@@ -216,7 +189,6 @@ function replace_url(url_name,url_num){
   var oUrl = this.location.href.toString();
   var re = eval('/('+url_name+'=)([^&]*)/gi');
   var nUrl = oUrl.replace(re,url_name+'='+url_num);
-  console.log(nUrl);
   history.replaceState(0,0,nUrl);
   
 }
@@ -234,7 +206,7 @@ function reset(){
 function Render(data_list){
   let infor = '';
   let count = 0;
-  var type_id = document.getElementById("category").value;
+
   for (let i of data_list) {
     if (i.productMedia[0] && i.productMedia[0].url) {
       let imgAddre = "https://storage.googleapis.com/luxe_media/wwwroot/" + i.productMedia[0].url;
@@ -257,8 +229,4 @@ function Render(data_list){
     let sorry = `<div class="sorry">Sorry, cannot find the product.</div>`;
     document.getElementById('item').innerHTML = sorry;
   }
-  
-  
 }
-
-

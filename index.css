@@ -13,8 +13,29 @@
   text-align: center;
 }
 
+.nav_Price{
+  display: inline-block; 
+  font-size: 15px; 
+  margin-right: 20px;
+}
+
+#price{
+  display: inline-block; 
+  font-size: 15px;
+  background-color:gainsboro; 
+  border-radius: 10px;
+}
+
 .category {
   text-align: center;
+}
+
+#category{
+  display: inline-block; 
+  font-size: 15px;
+  background-color:gainsboro; 
+  border-radius: 10px; 
+  width: 200px;
 }
 
 .sort {
@@ -93,4 +114,56 @@ body{
 
 .totol {
   flex: 1;
+}
+
+.nav_Cate{
+  display: inline-block; 
+  font-size: 15px; 
+  margin-right: 20px;
+}
+
+.nav_Alph_Sort{
+  display: inline-block; 
+  font-size: 15px; 
+  margin-right: 0px;
+}
+
+.nav_Price_Sort{
+  display: inline-block; 
+  font-size: 15px; 
+  margin-right: 0px;
+}
+
+.ascending{
+  display: inline-block;
+}
+
+.decending{
+  display: inline-block;
+}
+
+.nav_Sort_button{
+  font-size: 10px;
+  margin-left: 20px;
+  background-color: gainsboro;
+}
+
+.nav_reset{
+  margin: -5px 50px 5px 50px; 
+  text-align: right;
+}
+
+.nav_reset_buttom{
+  font-size: 15px;
+  margin-right: 20px;
+  background-color: gainsboro;
+}
+
+#item{
+  margin: 10px 0;
+}
+
+.bottom{
+  color: aliceblue;
+  margin: 10px auto 0 auto;
 }
