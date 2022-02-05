@@ -43,12 +43,12 @@
 }
 .sort1 {
   text-align: center;
-  
 }
 
 .nav1 {
   margin: 5px 50px 0px 50px;
   padding: 0 auto;
+  
 }
 
 .title {
@@ -149,13 +149,13 @@ body{
 }
 
 .nav_reset{
-  margin: -5px 50px 5px 50px; 
-  text-align: right;
+  text-align: center;
+
 }
 
 .nav_reset_buttom{
   font-size: 15px;
-  margin-right: 20px;
+  margin-left: 20px;
   background-color: gainsboro;
 }
 

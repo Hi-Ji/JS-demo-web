@@ -1,7 +1,4 @@
-let data_list = [];
-for (let i of rawdata) {
-  data_list.push(i);
-}
+let data_list = rawdata;
 Render(data_list);
 distribution();
 

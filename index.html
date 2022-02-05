@@ -16,7 +16,7 @@
       <p class="title">List of Rental Products</p>
     
       <div class="row nav1">
-        <div class="col-12 col-xxl-3 category">
+        <div class="col-12 col-md-6 category">
           <p class="nav_Cate">Category: </p>
           <select name="Category" id="category" onchange="url_check(id,value);distribution()" >
             <option value="0" class="option">All Hires</option>
@@ -41,7 +41,7 @@
           </select>
         </div>
         
-        <div class="col-12 col-xxl-3 price">
+        <div class="col-12 col-md-6 price">
           
             <p class="nav_Price">Price:</p>
             <select name="Price" id="price" onchange="url_check(id,value);distribution()">
@@ -52,8 +52,10 @@
               <option value="501" class="option">> 500</option>
             </select>
         </div>
+      </div>
 
-        <div class="col-12 col-xxl-3 sort">
+      <div class="row nav1">
+        <div class="col-12 col-xl-4 sort">
           <p class="nav_Alph_Sort">Alph Sort:</p>
           <div class="ascending">
             <button type="button" class="btn btn-outline-secondary nav_Sort_button" onclick="Alph_ascending()" >Ascending</button>
@@ -63,7 +65,7 @@
           </div>
         </div>
 
-        <div class="col-12 col-xxl-3 sort1">
+        <div class="col-12 col-xl-4 sort1">
           <p class="nav_Price_Sort">Price Sort:</p>
           <div class="ascending">
             <button type="button" class="btn btn-outline-secondary nav_Sort_button" onclick="Price_ascending()" >Ascending</button>
@@ -72,12 +74,13 @@
             <button type="button" class="btn btn-outline-secondary nav_Sort_button" onclick="Price_decending()" >Decending</button>
           </div>
         </div>
-      </div>
-
-      <div class="nav_reset">
-        <button type="button" class="btn btn-outline-secondary nav_reset_buttom" onclick="reset()">Reset</button>
-      </div>
       
+
+        <div class="col-12 col-xl-4 nav_reset">
+          <p class="nav_Alph_Sort">Reset:</p>
+          <button type="button" class="btn btn-outline-secondary nav_reset_buttom" onclick="reset()">Reset</button>
+        </div>
+      </div>  
 
     <div class=" infor">
       <div class="row" id="item"></div>
