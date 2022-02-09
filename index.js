@@ -18,10 +18,15 @@ function distribution() {
       if (param[1] != 0){
         category_list = category(param[1]);
       }
+      console.log(param[1])
+      var selId_category = document.getElementById('category');
+      selId_category.value = param[1];
     }else if (param[0] == 'price'){
       if (param[1] != 0){
         price_list = price(param[1]);
       }
+      var selId_price = document.getElementById('price');
+      selId_price.value = param[1];
     }
   }
   
