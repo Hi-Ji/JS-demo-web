@@ -1,9 +1,14 @@
 let data_list = rawdata;
-Render(data_list);
+let temp_list = [];
+var temp_num = 0;
+var last_num_position = 0;
+
 distribution();
 
 function distribution() {
+  last_num_position = 0;
   data_list = [];
+
   let category_list = [];
   let price_list = [];
   const params = new URLSearchParams(window.location.search);
@@ -18,7 +23,6 @@ function distribution() {
       if (param[1] != 0){
         category_list = category(param[1]);
       }
-      console.log(param[1])
       var selId_category = document.getElementById('category');
       selId_category.value = param[1];
     }else if (param[0] == 'price'){
@@ -34,30 +38,30 @@ function distribution() {
     for (let l of price_list){
       if (i == l) {
         data_list.push(l);
+
         break;
       }
     }
   }
-  Render(data_list);
 
+//----------------------------------------------------------
   for (const param of params){
     if (param[0] == 'sort'){
       if (param[1] == 'Alph_ascending'){
-        Alph_ascending();
+        data_list = Alph_ascending();
       }else if (param[1] == 'Alph_decending'){
-        Alph_decending();
+        data_list = Alph_decending();
       }else if (param[1] == 'Price_ascending'){
-        Price_ascending();
+        data_list = Price_ascending();
       }else if (param[1] == 'Price_decending'){
-        Price_decending();
+        data_list = Price_decending();
       }
     }
   }
+  check_infor(data_list)
+  dispatch();
+  
 }
-
-
-
-
 
 function category (value) {
   let a_list = [];
@@ -102,8 +106,7 @@ function Alph_ascending() {
         }
       }
     }
-  Render(ascending_list);
-  url_check("sort","Alph_ascending");
+  return(ascending_list);
 }
 
 
@@ -122,8 +125,8 @@ function Alph_decending() {
         }
       }
     }
-    Render(decending_list);
-    url_check("sort","Alph_decending");
+     
+    return(decending_list);
 }
 
 function Price_ascending() {
@@ -140,8 +143,8 @@ function Price_ascending() {
         }
       }
     }
-  Render(ascending_list);
-  url_check("sort","Price_ascending");
+    
+  return(ascending_list);
 }
 
 
@@ -160,8 +163,8 @@ function Price_decending() {
         }
       }
     }
-  Render(ascending_list);
-  url_check("sort","Price_decending");
+  
+  return(ascending_list);
 }
 
 function url_check(url_name,url_num){
@@ -201,6 +204,98 @@ function reset(){
   var new_url = url.substring(0, new_url1);
   window.location.replace(new_url);
 }
+
+
+var last_num_position = 0;
+var add_num = 0;
+var check_num = 0;
+
+
+
+function check_infor(list){
+  temp_list = [];
+  for (let i of list) {
+    if (i.productMedia[0] && i.productMedia[0].url) {
+      temp_list.push(i);
+    }
+  }
+  
+}
+
+function num_per_page() {
+  var div_with = Math.floor(document.body.clientWidth);
+  var div_w;
+  if(div_with<576){
+    div_w = 1;
+  }else if (div_with>=576 && div_with<768){
+    div_w = 2;
+  }else if (div_with>=768 && div_with<992){
+    div_w = 3;
+  }else if (div_with>=992 && div_with<1200){
+    div_w = 4;
+  }else if (div_with>=1200){
+    div_w = 6;
+  }
+  var div_h = Math.floor(document.body.clientHeight*0.7/236);
+  return(div_w*div_h);
+}
+
+function check_l_r(num){
+  check_num = num;
+  
+}
+//----------------------------------------------------------
+function dispatch(){
+  add_num = num_per_page();
+  if (check_num == -1){
+    console.log('-11111')
+    last_num_position += add_num;
+    Next_page(temp_list);
+  }else if(check_num == -2){
+    console.log('-22222')
+    last_num_position -= add_num;
+    Previous_page(temp_list);
+  }else {
+    Render(temp_list.slice(temp_num,temp_num+add_num));
+    console.log('00000')
+  }
+  console.log("last_num_position="+last_num_position,"add_num="+add_num)
+
+}
+//----------------------------------------------------------
+function Next_page(list){
+  add_num = num_per_page();
+  if(last_num_position < list.length-1){
+    Render(list.slice(last_num_position,last_num_position+add_num));
+    temp_num = last_num_position;
+    console.log("next1111")
+  }else{
+    Render(list.slice(last_num_position-add_num,last_num_position))
+    last_num_position -= add_num;
+    console.log("next222")
+  }
+  check_num = 0;
+}
+
+
+function Previous_page(list){
+  add_num = num_per_page();
+  if(last_num_position >= add_num){
+    Render(list.slice(last_num_position,last_num_position+add_num));
+    temp_num = last_num_position-add_num;
+    console.log("Previous111")
+    console.log(last_num_position > add_num)
+  }else{
+    last_num_position = 0;
+    console.log('Previous222')
+    Render(list.slice(0,add_num))
+    
+  }
+  check_num = 0;
+}
+
+
+
 
 
 

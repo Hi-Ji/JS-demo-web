@@ -167,3 +167,8 @@ body{
   color: aliceblue;
   margin: 10px auto 0 auto;
 }
+
+.change_page{
+  margin: 10px auto;
+  width: fit-content;
+}
