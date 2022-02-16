@@ -2,7 +2,9 @@ let data_list = rawdata;
 let temp_list = [];
 var temp_num = 0;
 var last_num_position = 0;
-
+var check_num = 0;
+var page_n = 1;
+var add_num = 0;
 distribution();
 
 function distribution() {
@@ -60,7 +62,7 @@ function distribution() {
   }
   check_infor(data_list)
   dispatch();
-  
+  add_page_num()
 }
 
 function category (value) {
@@ -76,6 +78,7 @@ function category (value) {
 
 function price (value) {
   let a_price_list = [];
+  temp_num = 0;
   for (let i of rawdata) {
     if (value == 100 && i.price <= 100){
       a_price_list.push(i);
@@ -208,7 +211,7 @@ function reset(){
 
 var last_num_position = 0;
 var add_num = 0;
-var check_num = 0;
+
 
 
 
@@ -238,41 +241,49 @@ function num_per_page() {
   }
   var div_h = Math.floor(document.body.clientHeight*0.7/236);
   return(div_w*div_h);
+  
 }
 
 function check_l_r(num){
   check_num = num;
-  
 }
-//----------------------------------------------------------
+
+function check_page_num(num){
+  page_n = num
+}
+
 function dispatch(){
   add_num = num_per_page();
   if (check_num == -1){
-    console.log('-11111')
     last_num_position += add_num;
     Next_page(temp_list);
+    
   }else if(check_num == -2){
-    console.log('-22222')
     last_num_position -= add_num;
     Previous_page(temp_list);
-  }else {
+    
+  }else if(check_num == 0){
     Render(temp_list.slice(temp_num,temp_num+add_num));
-    console.log('00000')
   }
-  console.log("last_num_position="+last_num_position,"add_num="+add_num)
-
 }
-//----------------------------------------------------------
+
+function dispatch_num(){
+  add_num = num_per_page();
+  Render(temp_list.slice(page_n*add_num-add_num,page_n*add_num));
+  last_num_position=add_num*page_n -add_num;
+  add_page_num();
+}
+
 function Next_page(list){
   add_num = num_per_page();
-  if(last_num_position < list.length-1){
+  if(last_num_position < list.length){
     Render(list.slice(last_num_position,last_num_position+add_num));
     temp_num = last_num_position;
-    console.log("next1111")
+    page_n += 1;
+    
   }else{
     Render(list.slice(last_num_position-add_num,last_num_position))
     last_num_position -= add_num;
-    console.log("next222")
   }
   check_num = 0;
 }
@@ -283,15 +294,22 @@ function Previous_page(list){
   if(last_num_position >= add_num){
     Render(list.slice(last_num_position,last_num_position+add_num));
     temp_num = last_num_position-add_num;
-    console.log("Previous111")
-    console.log(last_num_position > add_num)
+    page_n -= 1;
   }else{
     last_num_position = 0;
-    console.log('Previous222')
     Render(list.slice(0,add_num))
-    
   }
   check_num = 0;
+}
+
+function add_page_num(){
+  add_num = num_per_page();
+  page_len = Math.ceil(temp_list.length/add_num);
+  let infor = '';
+  for(var i=1; i <= page_len; i++){
+    infor += `<li class="page-item" style="display: inline-block;" onclick="check_page_num(${i});dispatch_num()"><a class="page-link">${i}</a></li>`
+    document.getElementById('page_num').innerHTML = infor;
+  }
 }
 
 

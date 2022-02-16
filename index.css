@@ -1,8 +1,7 @@
 .infor{
-  border: 0.5px solid grey;
   border-radius: 5px;
   max-height: 75vh;
-  overflow-y: auto;
+  overflow-y: hidden;
   overflow-x: hidden;
   margin: 0 50px;
   
@@ -169,6 +168,11 @@ body{
 }
 
 .change_page{
-  margin: 10px auto;
+  margin: auto auto 5vh auto;
   width: fit-content;
+  flex: 1;
+}
+
+.pagination li{
+  display: inline;
 }

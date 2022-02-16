@@ -11,7 +11,7 @@
 </head>
 
 <!--------------------------------------------------------------------------->
-<body onresize="dispatch()">
+<body onresize="dispatch();add_page_num()">
   <div class="totol">
       <p class="title">List of Rental Products</p>
     
@@ -85,27 +85,28 @@
       <div class="row" id="item"></div>
     </div>
 
-
-    <div >
-      <nav aria-label="Page navigation example" class="change_page">
-        <ul class="pagination">
-          <li class="page-item">
-            <a class="page-link" aria-label="Previous" onclick="check_l_r(-2);dispatch()">
-              <span aria-hidden="true">&laquo;</span>
-            </a>
-          </li>
-          <li class="page-item"><a class="page-link" href="#">1</a></li>
-          <li class="page-item"><a class="page-link" href="#">2</a></li>
-          <li class="page-item"><a class="page-link" href="#">3</a></li>
-          <li class="page-item">
-            <a class="page-link" aria-label="Next" onclick="check_l_r(-1);dispatch()">
-              <span aria-hidden="true">&raquo;</span>
-            </a>
-          </li>
-        </ul>
-      </nav>
-    </div>
   </div>
+
+  <div >
+    <nav aria-label="Page navigation example" class="change_page">
+      <ul class="pagination">
+        <li class="page-item">
+          <a class="page-link" aria-label="Previous" onclick="check_l_r(-2);dispatch()">
+            <span aria-hidden="true">&laquo;</span>
+          </a>
+        </li>
+
+        <li id="page_num"></li>
+        
+        <li class="page-item">
+          <a class="page-link" aria-label="Next" onclick="check_l_r(-1);dispatch()" >
+            <span aria-hidden="true">&raquo;</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+
   <div> 
     <p class="bottom">Thank you for visiting our product</p>
   </div>
