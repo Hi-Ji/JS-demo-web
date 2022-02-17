@@ -34,7 +34,7 @@
   font-size: 15px;
   background-color:gainsboro; 
   border-radius: 10px; 
-  width: 200px;
+  width: auto;
 }
 
 .sort {
@@ -175,4 +175,8 @@ body{
 
 .pagination li{
   display: inline;
+}
+
+.pagination:hover{
+  cursor: pointer;
 }
