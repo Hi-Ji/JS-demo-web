@@ -254,28 +254,50 @@ function check_page_num(num){
 
 function dispatch(){
   add_num = num_per_page();
+  var page_len = Math.ceil(temp_list.length/add_num);
   if (check_num == -1){
     last_num_position += add_num;
     Next_page(temp_list);
-    
+    add_page_num();
+    console.log('-->'+page_n)
   }else if(check_num == -2){
     last_num_position -= add_num;
     Previous_page(temp_list);
-    
-  }else if(check_num == 0){
-    Render(temp_list.slice(temp_num,temp_num+add_num));
+    add_page_num();
+    console.log('<--'+page_n)
+  }else if(check_num == -3){
+    page_n = Math.ceil(temp_list.length/add_num);
+    last_num_position = add_num*page_n -page_n;
+    page_n = page_len;
+    dispatch_num1()
+    check_num=0;
+
+  }else{
+    Render(temp_list.slice(last_num_position,last_num_position+add_num));
   }
 }
 
 function dispatch_num(){
   add_num = num_per_page();
-  Render(temp_list.slice(page_n*add_num-add_num,page_n*add_num));
-  last_num_position=add_num*page_n -add_num;
+  last_num_position = add_num*page_n - add_num;
+  Render(temp_list.slice(last_num_position,page_n*add_num));
   add_page_num();
+}
+
+function dispatch_num1(){
+  var page_len = Math.ceil(temp_list.length/add_num);
+  add_num = num_per_page();
+  last_num_position = add_num*page_n - add_num;
+  page_n = page_len;
+  Render(temp_list.slice(last_num_position,page_n*add_num));
+  add_page_num1();
+
+  console.log(temp_list.length);
 }
 
 function Next_page(list){
   add_num = num_per_page();
+  var page_len = Math.ceil(temp_list.length/add_num);
   if(last_num_position < list.length){
     Render(list.slice(last_num_position,last_num_position+add_num));
     temp_num = last_num_position;
@@ -284,6 +306,9 @@ function Next_page(list){
   }else{
     Render(list.slice(last_num_position-add_num,last_num_position))
     last_num_position -= add_num;
+    if(page_n<page_len){
+      page_n += 1;
+    }
   }
   check_num = 0;
 }
@@ -298,20 +323,74 @@ function Previous_page(list){
   }else{
     last_num_position = 0;
     Render(list.slice(0,add_num))
+    if(page_n!=1){
+      page_n -= 1;
+    }
   }
   check_num = 0;
 }
 
+function add_page_num1(){
+  add_num = num_per_page();
+  let infor1 = '';
+  infor1 += `<div style="display: inline-block; margin-right:15px;color: #0d6efd;">···</div>`
+    for (var i = page_n-4;i<=page_n;i++){
+      infor1 += `
+      <li class="page-item" style="display: inline-block;" onclick="check_page_num(${i});dispatch_num()"><a class="page-link">${i}</a></li>
+              `
+    }
+  document.getElementById('page_num').innerHTML = infor1;
+}
+//----------------------------------------------------------------------
 function add_page_num(){
   add_num = num_per_page();
-  page_len = Math.ceil(temp_list.length/add_num);
+  var page_len = Math.ceil(temp_list.length/add_num);
   let infor = '';
-  for(var i=1; i <= page_len; i++){
-    infor += `<li class="page-item" style="display: inline-block;" onclick="check_page_num(${i});dispatch_num()"><a class="page-link">${i}</a></li>`
+  
+  if(page_len <= 5){
+    infor += `<div style="display: inline-block; margin-right:15px;"></div>`
+    for(var i=1; i <= page_len; i++){
+      infor += `
+      <li class="page-item" style="display: inline-block;" onclick="check_page_num(${i});dispatch_num()"><a class="page-link">${i}</a></li>
+      `
+    }
+    infor += `<div style="display: inline-block; margin-right:15px;"></div>`
     document.getElementById('page_num').innerHTML = infor;
+  }else if(page_len > 5 && page_n<=page_len-2){
+    if(page_n <=3){
+      for (var i = 1;i<=5;i++){
+        infor += ` 
+        <li class="page-item" style="display: inline-block;" onclick="check_page_num(${i});dispatch_num()"><a class="page-link">${i}</a></li>
+        `
+      }
+      infor += `<div style="display: inline-block; margin-right:15px;color: #0d6efd;">···</div>`
+      document.getElementById('page_num').innerHTML = infor;
+      console.log('开头')
+    }else if(page_n>=page_len-2){
+      infor += `<div style="display: inline-block; margin-right:15px;color: #0d6efd;">···</div>`
+      for (var i = page_n-2;i<=page_n+2;i++){
+        infor += `
+        <li class="page-item" style="display: inline-block;" onclick="check_page_num(${i});dispatch_num()"><a class="page-link">${i}</a></li>
+        `
+      }
+      document.getElementById('page_num').innerHTML = infor;
+      console.log('最后')
+    }else{
+      infor += `<div style="display: inline-block; margin-left:15px;color: #0d6efd;">···</div>`
+        for (var i = page_n-2;i<=page_n+2;i++){
+          infor += `
+          <li class="page-item" style="display: inline-block;" onclick="check_page_num(${i});dispatch_num()"><a class="page-link">${i}</a></li>
+          `
+        }
+      infor += `<div style="display: inline-block; margin-right:15px;color: #0d6efd;">···</div>`
+      document.getElementById('page_num').innerHTML = infor;
+      console.log('中间')
+    }
   }
+  console.log(page_n)
+  console.log('结束')
+  console.log('测试'+page_len)
 }
-
 
 
 
@@ -344,4 +423,5 @@ function Render(data_list){
     let sorry = `<div class="sorry">Sorry, cannot find the product.</div>`;
     document.getElementById('item').innerHTML = sorry;
   }
+  add_page_num();
 }
